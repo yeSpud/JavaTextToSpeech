@@ -10,6 +10,7 @@ import javax.swing.JRootPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 
+// TODO: JavaFX refresh!!!
 public class TexttoSpeech {
 	final static String INFO = "Text to Speech version 1.2";
 	static String Recent1 = "I am";
