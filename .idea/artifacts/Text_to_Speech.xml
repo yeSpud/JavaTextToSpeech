@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="Text to Speech">
+    <output-path>$PROJECT_DIR$/classes/artifacts/Text_to_Speech</output-path>
+    <root id="root">
+      <element id="archive" name="Text_to_Speech.jar">
+        <element id="module-output" name="Text to Speech" />
+      </element>
+    </root>
+  </artifact>
+</component>
