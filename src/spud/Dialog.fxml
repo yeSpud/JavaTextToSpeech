@@ -23,7 +23,7 @@
       <Separator orientation="VERTICAL" prefHeight="10.0" />
       <HBox alignment="CENTER" fillHeight="false" spacing="5.0">
          <children>
-            <Button contentDisplay="CENTER" defaultButton="true" mnemonicParsing="false" text="Speak!" />
+            <Button contentDisplay="CENTER" defaultButton="true" mnemonicParsing="false" onAction="#speak" text="Speak!" />
             <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#openSettings" text="Settings" />
             <Button cancelButton="true" contentDisplay="CENTER" mnemonicParsing="false" onAction="#exit" text="Quit" />
          </children>
