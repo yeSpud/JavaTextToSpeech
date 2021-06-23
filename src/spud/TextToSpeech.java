@@ -2,6 +2,7 @@ package spud;
 
 import javafx.application.Application;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -12,22 +13,22 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class TextToSpeech extends Application {
 
-	//private native void execCommand(String[] command);
-
 	public static void main(String[] args) {
-		launch(args);
+		TextToSpeech.launch(args);
 	}
 
 	private static TextField input;
 
 	private static final Button[] mostRecentButtons = new Button[3];
-
-	private static final String[] COMMAND_HEADER = {"/bin/zsh", "-c"};
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -69,7 +70,7 @@ public class TextToSpeech extends Application {
 	 * Close the application.
 	 */
 	@FXML
-	public void exit() {
+	protected void exit() {
 		System.exit(0);
 	}
 
@@ -77,12 +78,26 @@ public class TextToSpeech extends Application {
 	 * TODO Documentation
 	 */
 	@FXML
-	public void speak() {
+	protected void speak() {
+
+		String text = TextToSpeech.input.getText();
+
+		// Check if the entered text has any speakable characters.
+		Pattern pattern = Pattern.compile("[\\d|\\w]");
+		Matcher matcher = pattern.matcher(text);
+
+		// If the entered text is just whitespace just return.
+		if (!matcher.find()) {
+			return;
+		}
+
+		// Shift input.
+		TextToSpeech.mostRecentButtons[2].setText(TextToSpeech.mostRecentButtons[1].getText());
+		TextToSpeech.mostRecentButtons[1].setText(TextToSpeech.mostRecentButtons[0].getText());
+		TextToSpeech.mostRecentButtons[0].setText(text);
 
 		// Execute the speech command.
-		TextToSpeech.executeCommand(new String[]{"say", TextToSpeech.input.getText()});
-
-		// TODO Shift input.
+		TextToSpeech.executeCommand(new String[]{"say", text});
 
 		// Clear the input.
 		TextToSpeech.input.clear();
@@ -90,10 +105,25 @@ public class TextToSpeech extends Application {
 
 	/**
 	 * TODO Documentation
+	 * @param event
 	 */
 	@FXML
-	public void openSettings() {
-		TextToSpeech.executeCommand(new String[]{"open \"x-apple.systempreferences:com.apple.preference.universalaccess?TextToSpeech\""});
+	protected void mostRecent(ActionEvent event) {
+
+		Button button = (Button) event.getTarget();
+
+		TextToSpeech.input.setText(button.getText());
+
+		this.speak();
+	}
+
+	/**
+	 * TODO Documentation
+	 */
+	@FXML
+	protected void openSettings() {
+		TextToSpeech.executeCommand(new String[]{"/bin/zsh", "-c",
+				"open \"x-apple.systempreferences:com.apple.preference.universalaccess?TextToSpeech\""});
 	}
 
 	/**
@@ -107,29 +137,19 @@ public class TextToSpeech extends Application {
 			return;
 		}
 
-		String[] FINAL_COMMAND = new String[TextToSpeech.COMMAND_HEADER.length + command.length];
-
-		System.arraycopy(TextToSpeech.COMMAND_HEADER, 0, FINAL_COMMAND, 0, TextToSpeech.COMMAND_HEADER.length);
-		System.arraycopy(command, 0, FINAL_COMMAND, TextToSpeech.COMMAND_HEADER.length, command.length);
-
-		//new ExecCommand(FINAL_COMMAND);
-		/*
-		Process process = null;
 		try {
-			process = Runtime.getRuntime().exec(FINAL_COMMAND);
-
-			new ReadStream("stdin", process.getInputStream()).start();
-			new ReadStream("stderr", process.getErrorStream()).start();
-
+			Process process = Runtime.getRuntime().exec(command);
 			process.waitFor();
+
+			BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+			@SuppressWarnings("MismatchedQueryAndUpdateOfStringBuilder")
+			StringBuilder output = new StringBuilder();
+			String line;
+			while ((line = reader.readLine()) != null) {
+				output.append(line).append("\n");
+			}
 		} catch (IOException | InterruptedException e) {
 			e.printStackTrace();
-		} finally {
-
-			if (process != null) {
-				process.destroy();
-			}
 		}
-		 */
 	}
 }
