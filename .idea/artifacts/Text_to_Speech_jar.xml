@@ -1,0 +1,18 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Text to Speech:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Text_to_Speech_jar</output-path>
+    <root id="archive" name="Text to Speech.jar">
+      <element id="module-output" name="Text to Speech" />
+      <element id="extracted-dir" path="$USER_HOME$/.m2/repository/org/openjfx/javafx-archetype-fxml/0.0.6/javafx-archetype-fxml-0.0.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.m2/repository/org/openjfx/javafx-fxml/17-ea+13/javafx-fxml-17-ea+13.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.m2/repository/org/openjfx/javafx-fxml/17-ea+13/javafx-fxml-17-ea+13-mac.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.m2/repository/org/openjfx/javafx-controls/17-ea+13/javafx-controls-17-ea+13.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.m2/repository/org/openjfx/javafx-controls/17-ea+13/javafx-controls-17-ea+13-mac.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.m2/repository/org/openjfx/javafx-graphics/17-ea+13/javafx-graphics-17-ea+13.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.m2/repository/org/openjfx/javafx-graphics/17-ea+13/javafx-graphics-17-ea+13-mac.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.m2/repository/org/openjfx/javafx-base/17-ea+13/javafx-base-17-ea+13.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.m2/repository/org/openjfx/javafx-base/17-ea+13/javafx-base-17-ea+13-mac.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.m2/repository/org/jetbrains/annotations/20.1.0/annotations-20.1.0.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

@@ -12,6 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.intellij.lang.annotations.RegExp;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -108,7 +110,7 @@ public class TextToSpeech extends Application {
 	 * @param event
 	 */
 	@FXML
-	protected void mostRecent(ActionEvent event) {
+	protected void mostRecent(@NotNull ActionEvent event) {
 
 		Button button = (Button) event.getTarget();
 
@@ -131,11 +133,7 @@ public class TextToSpeech extends Application {
 	 *
 	 * @param command
 	 */
-	private static void executeCommand(String[] command) {
-
-		if (command == null) {
-			return;
-		}
+	private static void executeCommand(@NotNull String[] command) {
 
 		try {
 			Process process = Runtime.getRuntime().exec(command);
